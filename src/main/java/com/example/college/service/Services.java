@@ -8,6 +8,7 @@ import com.example.college.dto.ResponseStructure;
 import com.example.college.dto.StudentDto;
 import com.example.college.entity.Adress;
 import com.example.college.entity.Student;
+import com.example.college.exception.StudentNotFoundException;
 import com.example.college.reposetory.AdressRepository;
 import com.example.college.reposetory.StudentRepository;
 
@@ -34,6 +35,15 @@ public class Services {
 		rs.setStatuscode(HttpStatus.FOUND.value());
 		rs.setMessage("candidate saved successfully");
 		rs.setData(s);
+		return rs;
+	}
+
+	public ResponseStructure<Student> findbyid(int id) {
+		Student stu = srp.findById(id).orElseThrow(() -> new StudentNotFoundException());
+		ResponseStructure<Student> rs = new ResponseStructure<Student>();
+		rs.setStatuscode(HttpStatus.FOUND.value());
+		rs.setMessage("Student Found");
+		rs.setData(stu);
 		return rs;
 	}
 }

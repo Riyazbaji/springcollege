@@ -23,4 +23,9 @@ public class Controller {
 	public ResponseStructure<Student> save(@RequestBody StudentDto stdto) {
 		return sr.saveStudent(stdto);
 	}
+	
+	@GetMapping("college/findbyid")
+	public ResponseStructure<Student> find(@RequestParam int id) {
+		return sr.findbyid(id);
+	}
 }
